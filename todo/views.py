@@ -4,4 +4,4 @@ def index(request):
     return render(request, 'todo/index.html')
 
 def login(request):
-    return render(request, 'todo/index.html')
+    return render(request, 'todo/login.html')

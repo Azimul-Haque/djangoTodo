@@ -1,5 +1,13 @@
 {% extends "adminlte/login.html" %}
 
+{% block title %}Todo Login{% endblock %}
+
+{% block logo %}
+<div class="login-logo">
+    <a href="{% block logo_href %}/login{% endblock %}">{% block logo_text %}<b>To</b>do App Log in{% endblock %}</a>
+</div>
+{% endblock %}
+
 {% block form %}
     <form method="post">
         {% csrf_token %}

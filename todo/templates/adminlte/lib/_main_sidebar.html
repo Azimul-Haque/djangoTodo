@@ -1,5 +1,7 @@
 {% extends 'adminlte/lib/_main_sidebar.html' %}
 
+
+
 {% block nav_links %}
     <li>
         <a href="/some/url">
@@ -12,4 +14,10 @@
         </a>
     </li>
 {% endblock nav_links %}
+
+{% block page_actions %}
+    <a href="{% url 'alerts:create' %}" class="btn btn-success btn-sm">Create new</a>
+{% endblock %}
+
+
 
