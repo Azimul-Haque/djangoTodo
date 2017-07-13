@@ -2,16 +2,24 @@
 
 {% load i18n %}
 
-{% block head_title %}{% trans "Signup" %}{% endblock %}
+{% block title %}Todo | Register{% endblock %}
 
 
 
 {% block body %}
     <div class="login-box">
 {% block content %}
-<h1>{% trans "Sign Up" %}</h1>
+		{% block logo %}
+          <div class="login-logo">
+              {# Mirrors block names used in _main_header.html #}
+              <a href="{% block logo_href %}/{% endblock %}">{% block logo_text %}<b>To</b>do App Register{% endblock %}</a>
+          </div>
+        {% endblock %}
+        <!-- /.login-logo -->
 
-<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</p>
+        <div class="login-box-body">
+
+<p>{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">log in</a>.{% endblocktrans %}</p>
 
 <form class="signup" id="signup_form" method="post" action="{% url 'account_signup' %}">
   {% csrf_token %}
@@ -19,10 +27,12 @@
   {% if redirect_field_value %}
   <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
   {% endif %}
-  <button type="submit">{% trans "Sign Up" %} &raquo;</button>
+  <br/>
+  <button type="submit" class="btn btn-primary btn-block btn-flat">Register &raquo;</button>
 </form>
 
 {% endblock %}
 
+      </div>
     </div>
 {% endblock %}
