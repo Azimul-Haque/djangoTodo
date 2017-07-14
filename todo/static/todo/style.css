@@ -14,6 +14,33 @@ body{
 	border-radius: 0 !important;
 }
 
+.alert {
+    border-style: none !important;
+}
+
+
+.taskTitleTextField {
+    border:none !important;
+    outline:none;
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    font-weight: bold;
+    font-size: 16px;
+    border-style: none !important;
+    border-bottom: 2px solid #4caf50 !important;
+}
+
+.textarea {
+    border:none !important;
+    outline:none;
+    border-color: inherit;
+    -webkit-box-shadow: none;
+    box-shadow: none;
+    resize: none;
+    border-style: none !important;
+}
+
 
 ul.errorlist {
     padding-left: 0;
@@ -67,7 +94,7 @@ ul.errorlist > li {
     background-color: #3949ab;
     border-color: #3949ab;
 }
-.panel-success>.panel-heading {
+.btn-success, .panel-success>.panel-heading {
     color: #ffffff;
     background-color: #4caf50;
     border-color: #4caf50;
@@ -132,3 +159,4 @@ img {
     width: 100%;
     height: auto;
 }
+

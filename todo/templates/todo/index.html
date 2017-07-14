@@ -6,13 +6,15 @@
 {% block page_description %}Personal To-Do Assistant!{% endblock %}
 {% block breadcrumbs %}{# Breadcrumb implementation left to developers #}{% endblock %}
 
+
+
 {% block content %}
 	<div class="row">
 		<div class="col-sm-6">
-		    <div class="well">
-		    	<input type="text" name="" class="form-control" placeholder="Title">
-		    	<textarea type="text" name="" class="form-control" placeholder="Write the Task here..."></textarea>
-		    	<button class="btn btn-primary btn-block btn-flat">Save</button>
+		    <div class="panel panel-default">
+		    	<input type="text" name="" class="form-control taskTitleTextField" placeholder="Title" onkeypress=if(event.keyCode==13){$('.textarea').focus();}>
+		    	<textarea type="text" name="" class="form-control textarea" placeholder="Write the Task here..."></textarea>
+		    	<button class="btn btn-success btn-block btn-flat">Save</button>
 		    </div>
 	    </div>
 	    <div class="col-sm-6">
