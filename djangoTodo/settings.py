@@ -53,6 +53,9 @@ INSTALLED_APPS = [
     'django.contrib.admindocs',
     'django.contrib.auth',
 
+    # widget_tweaks
+    'widget_tweaks',
+
     # allauth needs these
     'django.contrib.sites',
     'allauth',
@@ -83,6 +86,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -95,7 +99,7 @@ ROOT_URLCONF = 'djangoTodo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

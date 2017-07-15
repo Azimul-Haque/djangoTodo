@@ -1,0 +1,47 @@
+{% extends 'adminlte/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Todo{% endblock %}
+
+{% block page_name %}<b>Add Task</b>, <b>Check</b> and <b>Review</b>{% endblock %}
+{% block page_description %}Personal To-Do Assistant!{% endblock %}
+{% block breadcrumbs %}{# Breadcrumb implementation left to developers #}{% endblock %}
+
+
+
+{% block content %}
+
+
+	<div class="row">
+		<div class="col-sm-6">
+		    <div class="panel panel-default">
+		    	<!-- <input type="text" name="" class="form-control taskTitleTextField" placeholder="Title" onkeypress=if(event.keyCode==13){$('.textarea').focus();}>
+		    	<textarea type="text" name="" class="form-control textarea" placeholder="Write the Task here...">https://rayed.com/wordpress/?p=1266</textarea>
+		    	<button class="btn btn-success btn-block btn-flat">Save</button> -->
+
+
+			<form method="post">{% csrf_token %}
+			    {% for field in form %}
+			    	{% if field|field_type == 'modelchoicefield' or field|field_type == 'charfield' %}	
+			    		{% if field.html_name  == 'text' %}
+			    	    	{{ field.errors }}
+					    	{{ field|attr:"class:form-control textarea"|attr:"placeholder:Write the Task here..." }}
+			    		{% else  %}
+			    			{{ field.errors }}
+					    	{{ field|attr:"class:form-control taskTitleTextField"|attr:"placeholder:Title" }}
+			    		{% endif %}
+			    	{% else  %}
+			    			{{ field.errors }}
+			    			<label class="radio-inline">{{ field|attr:"class:checkbox" }}<span>{{ field.label }}</span></label>
+			    	{% endif %}
+			    {% endfor %}
+			    <button class="btn btn-success btn-block btn-flat" type="submit">Save</button>
+			</form>
+
+	
+	    </div>
+    </div>
+
+
+{% endblock %}
+

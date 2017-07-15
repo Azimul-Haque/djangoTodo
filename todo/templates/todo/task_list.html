@@ -1,0 +1,32 @@
+{% extends 'adminlte/base.html' %}
+
+{% block title %}Todo{% endblock %}
+
+{% block page_name %}<b>Add Task</b>, <b>Check</b> and <b>Review</b>{% endblock %}
+{% block page_description %}Personal To-Do Assistant!{% endblock %}
+{% block breadcrumbs %}{# Breadcrumb implementation left to developers #}{% endblock %}
+
+
+
+{% block content %}
+	<div class="row">
+		<div class="col-sm-6">
+		    <h1>Tasks</h1>
+			<ul>
+			    {% for task in object_list %}
+				    <li>{{ task.title }}  :  
+					    <a class="btn btn-primary btn-xs editBtn" href="{% url "task_edit" task.id %}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+					    <a class="btn btn-warning btn-xs deleteBtn" href="{% url "task_delete" task.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+				    </li>
+			    {% endfor %}
+			</ul>
+
+			<a href="{% url "task_create" %}">Create Task</a>
+	    </div>
+    </div>
+
+    
+
+
+{% endblock %}
+

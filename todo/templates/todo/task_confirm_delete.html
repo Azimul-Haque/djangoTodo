@@ -1,0 +1,30 @@
+{% extends 'adminlte/base.html' %}
+{% load widget_tweaks %}
+
+{% block title %}Todo{% endblock %}
+
+{% block page_name %}<b>Add Task</b>, <b>Check</b> and <b>Review</b>{% endblock %}
+{% block page_description %}Personal To-Do Assistant!{% endblock %}
+{% block breadcrumbs %}{# Breadcrumb implementation left to developers #}{% endblock %}
+
+
+
+{% block content %}
+
+
+	<div class="row">
+		<div class="col-sm-6">
+		    <div class="panel panel-danger">
+				<div class="panel-heading"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete Confirmation</div>
+				<div class="panel-body">
+					<form method="post">{% csrf_token %}
+					    Are you sure you want to delete "{{ object }}" ?<br/><br/>
+					    <button class="btn btn-danger btn-block"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete</button>
+					</form>
+				</div>
+		    </div>
+    </div>
+
+
+{% endblock %}
+

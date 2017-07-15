@@ -10,5 +10,47 @@
 <script src="{% static "bootstrap/dist/js/bootstrap.min.js" %} "></script>
 <script src="{% static "admin-lte/dist/js/app.min.js" %}"></script>
 
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script src="http://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+
+<script type="text/javascript">
+	toastr.options = {
+	  "closeButton": true,
+	  "debug": false,
+	  "newestOnTop": true,
+	  "progressBar": true,
+	  "positionClass": "toast-bottom-right",
+	  "preventDuplicates": false,
+	  "onclick": null,
+	  "showDuration": "400",
+	  "hideDuration": "1000",
+	  "timeOut": "5000",
+	  "extendedTimeOut": "1000",
+	  "showEasing": "swing",
+	  "hideEasing": "linear",
+	  "showMethod": "fadeIn",
+	  "hideMethod": "fadeOut"
+	}
+</script>
+
+
+	{% block extrascripts %}
+		{% if messages %}
+		            {% for message in messages %}
+		                {% if message.level == DEFAULT_MESSAGE_LEVELS.SUCCESS %}
+							    <script type="text/javascript">
+									toastr.success('{{ message }}', 'SUCCESS');
+							    </script>
+		                {% elif message.level == DEFAULT_MESSAGE_LEVELS.ERROR %}
+				                <script type="text/javascript">
+									toastr.error('{{ message }}', 'ERROR');
+							    </script>
+		                {% else %}
+				                <script type="text/javascript">
+									toastr.info('{{ message }}', 'INFO');
+							    </script>
+		                {% endif %}
+		            {% endfor %}
+		{% endif %}
+	{% endblock extrascripts %}
+
 {% endblock %}
