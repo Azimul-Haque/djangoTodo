@@ -16,7 +16,14 @@ def index(request):
 class TaskList(ListView):
     model = Task
     def get_queryset(self):
-        return Task.objects.filter(created_by=self.request.user.id, is_done=0)
+        return Task.objects.filter(created_by=self.request.user.id, is_deleted=0)
+
+
+class PriorityList(ListView):
+    model = Task
+    def get_queryset(self, *args, **kwargs):
+        return Task.objects.filter(created_by=self.request.user.id, priority=self.kwargs['pk'])
+
 
 class TaskCreate(SuccessMessageMixin, CreateView):
     model = Task
@@ -35,15 +42,20 @@ class TaskCreate(SuccessMessageMixin, CreateView):
 
 class TaskUpdate(SuccessMessageMixin, UpdateView):
     model = Task
+    def get_queryset(self):
+        return Task.objects.filter(created_by=self.request.user.id, is_deleted=0)
     success_url = reverse_lazy('task_list')
     success_message = "Task updated successfully!"
     fields = ['title', 'text', 'category', 'priority', 'is_pinned', 'is_done']
     exclude = ['created_by']
 
-class TaskDelete(SuccessMessageMixin, DeleteView):
+class TaskDelete(SuccessMessageMixin, UpdateView):  # instead of a DeleteView, softDelete is performed!
     model = Task
+    def get_queryset(self):
+        return Task.objects.filter(created_by=self.request.user.id, is_deleted=0)
     success_url = reverse_lazy('task_list')
     success_message = "Task Deleted successfully!"
+    fields = ['is_deleted']
     
     def delete(self, request, *args, **kwargs):
         messages.success(self.request, self.success_message)
@@ -52,7 +64,9 @@ class TaskDelete(SuccessMessageMixin, DeleteView):
 class TaskDone(SuccessMessageMixin, UpdateView):
     model = Task
     success_url = reverse_lazy('task_list')
-    success_message = "Task is done!"
+    success_message = "Task is updated!"
     fields = ['is_done']
+
+
 
 

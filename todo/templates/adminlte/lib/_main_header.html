@@ -48,11 +48,11 @@
                                 {% block menu_footer %}
                                 <li class="user-footer">
                                     <div class="pull-left">
-                                        <a href="{% block change_password_url %}{% url 'admin:password_change' %}{% endblock %}"
+                                        <a href="{% block change_password_url %}{% url 'account_change_password' %}{% endblock %}"
                                            class="btn btn-default btn-flat">{% trans 'Change password' %}</a>
                                     </div>
                                     <div class="pull-right">
-                                        <a href="/accounts/logout/" class="btn btn-default btn-flat">Sign out</a>
+                                        <a href="{% url 'account_logout' %}" class="btn btn-default btn-flat">Sign out</a>
                                     </div>
                                 </li>
                                 {% endblock %}
@@ -61,10 +61,10 @@
                         </li>
                     {% else %}
 	                    <li class="user user-menu">
-	                    	<a href="/accounts/login/"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
+	                    	<a href="{% url 'account_login' %}"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</a>
 	                    </li>
 	                    <li class="user user-menu">
-	                    	<a href="/accounts/signup"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</a>
+	                    	<a href="{% url 'account_signup' %}"><i class="fa fa-user-plus" aria-hidden="true"></i> Register</a>
 	                    </li>
                     {% endif %}
                 {% endblock header_dropdowns %}

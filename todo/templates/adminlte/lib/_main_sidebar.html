@@ -19,50 +19,64 @@
         {% block nav_links_ul %}
         <ul class="sidebar-menu">
             {% block nav_links_outer %}
-            <li class="header">{% block nav_heading %}Navigation{% endblock %}</li>
+            <li class="header">{% block nav_heading %}Task{% endblock %}</li>
 
             {% block nav_links %}
                 <li>
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Example link</span>
+                    <a href="{% url 'task_list' %}">
+                        <i class="fa fa-dashboard"></i> <span>Tasks</span>
                     </a>
                 </li>
                 <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-group"></i> <span>Sub menu</span>
+                    <a href="">
+                        <i class="fa fa-long-arrow-up" aria-hidden="true"></i> <span>Priority</span>
                         <span class="pull-right-container">
                             <i class="fa fa-angle-left pull-right"></i>
                         </span>
                     </a>
                     <ul class="treeview-menu">
+                        {% for priority in priorities %}
                         <li>
-                            <a href="#">
-                                <i class="fa fa-user"></i> Another link
+                            <a href="{% url 'priority_list' priority.id %}">
+                                <i class="fa fa-angle-double-up" aria-hidden="true"></i> {{ priority.name }}
                             </a>
                         </li>
+                        {% endfor %}
+                    </ul>
+                </li>
+                <li class="treeview">
+                    <a href="">
+                        <i class="fa fa-list-ol" aria-hidden="true"></i> <span>Category</span>
+                        <span class="pull-right-container">
+                            <i class="fa fa-angle-left pull-right"></i>
+                        </span>
+                    </a>
+                    <ul class="treeview-menu">
+                        {% for category in categories %}
+                        <li>
+                            <a href="#">
+                                {% if category.id == 1 %}
+                                    <i class="fa fa-tasks" aria-hidden="true"></i>
+                                {% else %}
+                                    <i class="fa fa-calendar-check-o" aria-hidden="true"></i>
+                                {% endif %} 
+                                {{ category.name }}
+                            </a>
+                        </li>
+                        {% endfor %}
                     </ul>
                 </li>
 
-                <li class="header">{% block nav_heading2 %}Navigation{% endblock %}</li>
+                <li class="header">{% block nav_heading2 %}Account{% endblock %}</li>
                 <li>
-                    <a href="#">
-                        <i class="fa fa-dashboard"></i> <span>Example link</span>
+                    <a href="{% url 'account_change_password' %}">
+                        <i class="fa fa-key" aria-hidden="true"></i> <span>Change password</span>
                     </a>
                 </li>
-                <li class="treeview">
-                    <a href="#">
-                        <i class="fa fa-group"></i> <span>Sub menu</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
+                <li>
+                    <a href="{% url 'account_logout' %}">
+                        <i class="fa fa-sign-out" aria-hidden="true"></i> <span>Log out</span>
                     </a>
-                    <ul class="treeview-menu">
-                        <li>
-                            <a href="#">
-                                <i class="fa fa-user"></i> Another link
-                            </a>
-                        </li>
-                    </ul>
                 </li>
             {% endblock nav_links %}
             {% endblock nav_links_outer %}

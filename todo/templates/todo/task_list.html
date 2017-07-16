@@ -11,28 +11,56 @@
 {% block content %}
 	<div class="row">
 		<div class="col-sm-6">
-		    <h1>Tasks</h1>
 		    	<table class="table">
-		    	{% for task in object_list %}
 					<tbody>
+		    	{% for task in object_list %}
 						<tr>
-							<td width="50%">{{ task.title }}</td>
-							<td width="30%">{{ task.category }}</td>
 							<td>
 								<form method="post" action="{% url "task_done" task.id %}">{% csrf_token %}
-						    		<input type="hidden" name="is_done" value="1">
-						    		<button class="btn btn-success btn-xs editBtn" type="submit"><i class="fa fa-check" aria-hidden="true"></i></button>
+						    		{% if not task.is_done %}
+						    			<input type="hidden" name="is_done" value="True">
+						    			<button class="btn btn-default btn-xs editBtn" type="submit"><i class="fa fa-hourglass-end" aria-hidden="true"></i></button>
+						    		{% else %}
+						    			<input type="hidden" name="is_done" value="False">
+						    			<button class="btn btn-success btn-xs editBtn" type="submit"><i class="fa fa-check" aria-hidden="true"></i></button>
+						    		{% endif %}
 								</form>
 							</td>
+							<td width="50%">{{ task.title }}</td>
+							<td width="30%">{{ task.category }}</td>
 							<td>
 								<a class="btn btn-primary btn-xs editBtn" href="{% url "task_edit" task.id %}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
 							</td>
 							<td>
-								<a class="btn btn-warning btn-xs deleteBtn" href="{% url "task_delete" task.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+								<button class="btn btn-danger btn-xs deleteBtn" href="#" data-toggle="modal" data-target="#deleteModal{{ task.id }}"><i class="fa fa-trash" aria-hidden="true"></i></button>
+								<!-- Modal -->
+							  <div class="modal fade" id="deleteModal{{ task.id }}" role="dialog">
+							    <div class="modal-dialog">
+							    
+							      <!-- Modal content-->
+							      <div class="modal-content">
+							        <div class="modal-header deleteModalHeader">
+							          <button type="button" class="close" data-dismiss="modal">&times;</button>
+							          <h4 class="modal-title"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete Confirmation
+							        </div>
+							        <div class="modal-body">
+							          <p>Delete task '{{ task.title }}'?</p>
+							        </div>
+							        <div class="modal-footer">
+							          	<form method="post" action="{% url "task_delete" task.id %}">{% csrf_token %}
+							          		<input type="hidden" name="is_deleted" value="True">
+										    <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i> Confirm Delete</button>
+							          		<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+										</form>
+							        </div>
+							      </div>
+							      
+							    </div>
+							  </div>
 							</td>
 						</tr>
-					</tbody>
 			    {% endfor %}
+					</tbody>
 			    </table>
 
 			<a href="{% url "task_create" %}">Create Task</a>

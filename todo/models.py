@@ -26,6 +26,7 @@ class Task(models.Model):
     priority = models.ForeignKey(Priority, on_delete=models.CASCADE)
     is_pinned = models.BooleanField(default=False)
     is_done = models.BooleanField(default=False)
+    is_deleted = models.BooleanField(default=False)
 
     def __str__(self):
         return self.title

@@ -117,7 +117,7 @@ ul.errorlist > li {
     background-color: #ffc107;
     border-color: #ffc107;
 }
-.btn-danger, .panel-danger>.panel-heading {
+.deleteModalHeader, .btn-danger, .panel-danger>.panel-heading {
     color: #ffffff;
     background-color: #f44336;
     border-color: #f44336;

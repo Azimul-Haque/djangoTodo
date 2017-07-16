@@ -25,7 +25,9 @@ SECRET_KEY = 'rpl$%(ofme8lr9-nvtsn5#cno5y$jk&kigr=0r1%$1xxoc4u-s'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '192.168.0.104',
+]
 
 AUTHENTICATION_BACKENDS = (
     # Needed to login by username in Django admin, regardless of `allauth`
@@ -75,11 +77,22 @@ INSTALLED_APPS = [
 
 SITE_ID = 1
 
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_UNIQUE_EMAIL = True
+ACCOUNT_USERNAME_REQUIRED = False
+
 TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.contrib.auth.context_processors.auth',
     'allauth.account.context_processors.account',
-    'allauth.socialaccount.context_processors.socialaccount'
+    'allauth.socialaccount.context_processors.socialaccount',
+
+    'django.core.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'todo.my_context_processors.include_categories',
+    'todo.my_context_processors.include_priorities',
 )
 
 
@@ -107,6 +120,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'todo.my_context_processors.include_categories',
+                'todo.my_context_processors.include_priorities',
             ],
         },
     },
