@@ -30,6 +30,7 @@ class TaskCreate(SuccessMessageMixin, CreateView):
         task.created_by = User.objects.get(id=self.request.user.id) # use your own profile here
         task.save()
         success_message = "Task created successfully!"
+        messages.success(self.request, self.success_message)
         return HttpResponseRedirect('/task/')
 
 class TaskUpdate(SuccessMessageMixin, UpdateView):
@@ -39,7 +40,19 @@ class TaskUpdate(SuccessMessageMixin, UpdateView):
     fields = ['title', 'text', 'category', 'priority', 'is_pinned', 'is_done']
     exclude = ['created_by']
 
-class TaskDelete(DeleteView):
+class TaskDelete(SuccessMessageMixin, DeleteView):
     model = Task
     success_url = reverse_lazy('task_list')
     success_message = "Task Deleted successfully!"
+    
+    def delete(self, request, *args, **kwargs):
+        messages.success(self.request, self.success_message)
+        return super(TaskDelete, self).delete(request, *args, **kwargs)
+
+class TaskDone(SuccessMessageMixin, UpdateView):
+    model = Task
+    success_url = reverse_lazy('task_list')
+    success_message = "Task is done!"
+    fields = ['is_done']
+
+

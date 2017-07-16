@@ -12,14 +12,28 @@
 	<div class="row">
 		<div class="col-sm-6">
 		    <h1>Tasks</h1>
-			<ul>
-			    {% for task in object_list %}
-				    <li>{{ task.title }}  :  
-					    <a class="btn btn-primary btn-xs editBtn" href="{% url "task_edit" task.id %}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
-					    <a class="btn btn-warning btn-xs deleteBtn" href="{% url "task_delete" task.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a>
-				    </li>
+		    	<table class="table">
+		    	{% for task in object_list %}
+					<tbody>
+						<tr>
+							<td width="50%">{{ task.title }}</td>
+							<td width="30%">{{ task.category }}</td>
+							<td>
+								<form method="post" action="{% url "task_done" task.id %}">{% csrf_token %}
+						    		<input type="hidden" name="is_done" value="1">
+						    		<button class="btn btn-success btn-xs editBtn" type="submit"><i class="fa fa-check" aria-hidden="true"></i></button>
+								</form>
+							</td>
+							<td>
+								<a class="btn btn-primary btn-xs editBtn" href="{% url "task_edit" task.id %}"><i class="fa fa-pencil" aria-hidden="true"></i></a>
+							</td>
+							<td>
+								<a class="btn btn-warning btn-xs deleteBtn" href="{% url "task_delete" task.id %}"><i class="fa fa-trash" aria-hidden="true"></i></a>
+							</td>
+						</tr>
+					</tbody>
 			    {% endfor %}
-			</ul>
+			    </table>
 
 			<a href="{% url "task_create" %}">Create Task</a>
 	    </div>

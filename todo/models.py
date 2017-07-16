@@ -5,18 +5,16 @@ import uuid
 
 
 class Category(models.Model):
-	name = models.CharField(max_length=200, unique=True, default=uuid.uuid4)
+    name = models.CharField(max_length=200, unique=True, default=uuid.uuid4)
 
-def __unicode__(self):
-		return self.name	
-
-
+    def __str__(self):
+	    return self.name
 
 class Priority(models.Model):
-	name = models.CharField(max_length=200, unique=True, default=uuid.uuid4)
+    name = models.CharField(max_length=200, unique=True, default=uuid.uuid4)
 
-def __unicode__(self):
-		return self.name	
+    def __str__(self):
+        return self.name
 
 
 
