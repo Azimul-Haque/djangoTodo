@@ -23,8 +23,13 @@
 
             {% block nav_links %}
                 <li>
+                    <a href="{% url 'task_create' %}">
+                        <i class="fa fa-plus" aria-hidden="true"></i> <span>Add Task</span>
+                    </a>
+                </li>
+                <li>
                     <a href="{% url 'task_list' %}">
-                        <i class="fa fa-dashboard"></i> <span>Tasks</span>
+                        <i class="fa fa-bell" aria-hidden="true"></i> <span>Tasks</span>
                     </a>
                 </li>
                 <li class="treeview">
@@ -54,7 +59,7 @@
                     <ul class="treeview-menu">
                         {% for category in categories %}
                         <li>
-                            <a href="#">
+                            <a href="{% url 'category_list' category.id %}">
                                 {% if category.id == 1 %}
                                     <i class="fa fa-tasks" aria-hidden="true"></i>
                                 {% else %}

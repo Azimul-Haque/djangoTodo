@@ -22,7 +22,13 @@ class TaskList(ListView):
 class PriorityList(ListView):
     model = Task
     def get_queryset(self, *args, **kwargs):
-        return Task.objects.filter(created_by=self.request.user.id, priority=self.kwargs['pk'])
+        return Task.objects.filter(created_by=self.request.user.id, priority=self.kwargs['pk'], is_deleted=0)
+
+
+class CategoryList(ListView):
+    model = Task
+    def get_queryset(self, *args, **kwargs):
+        return Task.objects.filter(created_by=self.request.user.id, category=self.kwargs['pk'], is_deleted=0)
 
 
 class TaskCreate(SuccessMessageMixin, CreateView):
@@ -63,10 +69,10 @@ class TaskDelete(SuccessMessageMixin, UpdateView):  # instead of a DeleteView, s
 
 class TaskDone(SuccessMessageMixin, UpdateView):
     model = Task
-    success_url = reverse_lazy('task_list')
     success_message = "Task is updated!"
     fields = ['is_done']
 
-
-
+    def get_success_url(self):
+              redirect_to=self.request.POST['next']
+              return redirect_to
 

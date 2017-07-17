@@ -10,6 +10,9 @@ urlpatterns = [
     # priority list
     url(r'^task/priority/(?P<pk>[0-9]+)/$', views.PriorityList.as_view(), name='priority_list'),
 
+    # category list
+    url(r'^task/category/(?P<pk>[0-9]+)/$', views.CategoryList.as_view(), name='category_list'),
+
     # task/create/
     url(r'task/create/$', views.TaskCreate.as_view(), name='task_create'),
 

@@ -19,9 +19,11 @@
 								<form method="post" action="{% url "task_done" task.id %}">{% csrf_token %}
 						    		{% if not task.is_done %}
 						    			<input type="hidden" name="is_done" value="True">
+						    			<input type="hidden" name="next" value="{{ request.path }}">
 						    			<button class="btn btn-default btn-xs editBtn" type="submit"><i class="fa fa-hourglass-end" aria-hidden="true"></i></button>
 						    		{% else %}
 						    			<input type="hidden" name="is_done" value="False">
+						    			<input type="hidden" name="next" value="{{ request.path }}">
 						    			<button class="btn btn-success btn-xs editBtn" type="submit"><i class="fa fa-check" aria-hidden="true"></i></button>
 						    		{% endif %}
 								</form>
@@ -41,15 +43,15 @@
 							      <div class="modal-content">
 							        <div class="modal-header deleteModalHeader">
 							          <button type="button" class="close" data-dismiss="modal">&times;</button>
-							          <h4 class="modal-title"><i class="fa fa-trash-o" aria-hidden="true"></i> Delete Confirmation
+							          <h4 class="modal-title"><i class="fa fa-trash-o" aria-hidden="true"></i> Forget Confirmation
 							        </div>
 							        <div class="modal-body">
-							          <p>Delete task '{{ task.title }}'?</p>
+							          <p>Forget task '{{ task.title }}'?</p>
 							        </div>
 							        <div class="modal-footer">
 							          	<form method="post" action="{% url "task_delete" task.id %}">{% csrf_token %}
 							          		<input type="hidden" name="is_deleted" value="True">
-										    <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i> Confirm Delete</button>
+										    <button class="btn btn-danger"><i class="fa fa-trash-o" aria-hidden="true"></i> Confirm Forget</button>
 							          		<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
 										</form>
 							        </div>
